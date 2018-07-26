@@ -17,8 +17,7 @@
 </template>
 <script>
 import axios from 'axios'
-// import {setCookie} from '../assets/js/cookie'
-const {session} = require('electron')
+const {session} = require('electron').remote;
     export default {
         data () {
             return {
@@ -50,6 +49,13 @@ const {session} = require('electron')
                     //         this.$Message.warning('登录失败');
                     //     }
                     // })
+
+                    const cookie = {url: 'http://www.github.com', name: 'admin', value: '4444'}
+                    session.defaultSession.cookies.set(cookie, (error) => {
+                        if (error) console.error(error)
+                    });
+                    // console.log(session);
+
                     this.$store.state.username = 'admin'
                     this.$Message.success('欢迎回来');
                     this.$router.push("/home");

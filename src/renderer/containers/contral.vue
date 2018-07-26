@@ -71,6 +71,7 @@ ipc.on('selected-directory', (event, path)=> {
 });
 
 const newWindowBtn = document.getElementById("new-window");
+const waringImg = require('../static/images/bigErr.png')
 export default {
   data() {
     return {
@@ -81,7 +82,7 @@ export default {
         notification1 : {
             title: '带图像通知',
             body: '这里是内容',
-            icon: path.join(__dirname, '../static/images/bigErr.png')
+            icon: waringImg
         },
         filePath1: '',
         valueC: '',
@@ -110,7 +111,7 @@ export default {
     },
     //带图像通知
     imgNoted(){
-        alert(this.notification1.icon);
+        // alert(this.notification1.icon);
         const myNotification = new window.Notification(this.notification1.title, this.notification1)
     },
     //选择文件
@@ -127,7 +128,7 @@ export default {
         clipboard.writeText(value)
     },
     pasteText(){
-        this.valueP = this.valueC;
+        this.valueP = clipboard.readText(this.valueC);
     },
     //打开文件夹
     showFilder(p) {

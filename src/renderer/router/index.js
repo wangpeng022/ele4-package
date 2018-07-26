@@ -7,6 +7,8 @@ import note from '@/containers/note.vue'
 import custom from '@/containers/iview-custom.vue'
 import login from '@/containers/login.vue'
 import contral from '@/containers/contral.vue'
+var session = require('electron').remote.session;
+
 
 Vue.use(Router)
 
@@ -18,6 +20,22 @@ export default new Router({
       path: '/home',
       name: 'home',
       component: home,
+      beforeEnter: (to, from, next) => {
+        session.defaultSession.cookies.get({url: 'http://www.github.com'}, (error, cookies) => {
+          if (cookies) {
+            // console.log(cookies);
+            for (var i = 0; i < cookies.length; i++) {
+              var cur = cookies[i];
+              if (cur.name=='admin') {
+                next();
+                break;
+              }
+            }
+          }else{
+            next('./login')
+          }
+        })
+      }
     },
     {
       path: '/core',

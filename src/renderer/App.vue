@@ -52,7 +52,8 @@
 <script>
     const UserList = ['U', 'Lucy', 'Tom', 'Edward'];
     const ColorList = ['#f56a00', '#7265e6', '#ffbf00', '#00a2ae'];
-    import {delCookie} from './static/js/cookie'
+    // import {delCookie} from './static/js/cookie'
+    const {session} = require('electron').remote;
     import { mapState } from 'vuex';
     import core from './containers/core.vue'
     export default {
@@ -91,7 +92,11 @@
                 this.color = index < ColorList.length - 1 ? ColorList[index + 1] : ColorList[0];
             },
             clear(){
-                delCookie('admin');
+
+                const cookie = {url: 'http://www.github.com', name: 'admin', value: '4444'}
+                session.defaultSession.cookies.set(cookie, (error) => {
+                    if (error) console.error(error)
+                })
                 this.$router.push("/login");
             }
         },
