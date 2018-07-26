@@ -2,9 +2,9 @@
   "name": "ele4-package",
   "productName": "ele4-package",
   "version": "0.0.0",
-  "author": "",
+  "author": "wangpeng022",
   "description": "An electron-vue project",
-  "license": null,
+  "license": "MIT",
   "main": "./dist/electron/main.js",
   "scripts": {
     "build": "node .electron-vue/build.js",

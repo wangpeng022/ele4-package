@@ -1,5 +1,5 @@
 import { app, BrowserWindow } from 'electron'
-
+const fileImg = require("../../static/images/nodata-data.png")
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
@@ -59,4 +59,12 @@ ipc.on('open-file-dialog', function (event) {
 //显示错误提示框
 ipc.on('open-error-dialog', function (event) {
   dialog.showErrorBox('别慌', '只是一条错误消息演示.')
+})
+
+//拖拽文件
+ipc.on('ondragstart', (event, filePath) => {
+  event.sender.startDrag({
+    file: filePath,
+    icon: fileImg
+  })
 })
